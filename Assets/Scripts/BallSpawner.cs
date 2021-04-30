@@ -11,7 +11,7 @@ public class BallSpawner : MonoBehaviour
     private GameObject[] GoodBalls;
 
     public int badBallCount = 30;
-    public int goodBallCount = 15;
+    public int goodBallCount = 20;
     private Vector3 randPosition;
     
     void Start()

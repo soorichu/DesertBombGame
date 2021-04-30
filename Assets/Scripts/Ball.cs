@@ -18,10 +18,9 @@ public class Ball : MonoBehaviour
     {
         if(collisionTime!=0f && Time.time >= collisionTime + interval)
         {
-            collisionTime = 0f;
+            collisionTime = Time.time;
             interval = Random.Range(7, 15);
-            transform.position = new Vector3(Random.Range(-50, 50), 10, Random.Range(-50, 50));
-            
+            ballRigidbody.AddForce(Random.Range(-20, 20), 0, Random.Range(-30, 20));
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -31,7 +30,7 @@ public class Ball : MonoBehaviour
 
         if (collision.collider.tag == "Player")
         {
-            interval = 0f;
+            transform.position = new Vector3(40, 1, 60);
         }
     }
 }

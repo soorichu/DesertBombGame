@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Desert");
         }
+        if(isGameover && Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.Quit();
+        }
     }
 
     public void AddScore(int newScore)
