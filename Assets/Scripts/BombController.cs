@@ -24,7 +24,7 @@ public class BombController : MonoBehaviour
         float translation = Input.GetAxis("Vertical") * speed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
 
-        if(translation!=0.0f || rotation != 0.0f) 
+        if (translation != 0.0f || rotation != 0.0f)
         {
             translation *= Time.deltaTime;
             rotation *= Time.deltaTime;
@@ -52,16 +52,20 @@ public class BombController : MonoBehaviour
             GameManager.instance.AddScore(-1);
         }
 
-        if(collision.collider.tag == "BadBall")
+        if (collision.collider.tag == "BadBall")
         {
             myAnimator.SetBool("walk", false);
             myAnimator.SetTrigger("attack01");
             GameManager.instance.OnPlayerDead();
         }
 
-        if(collision.collider.tag == "GoodBall")
+        if (collision.collider.tag == "GoodBall")
         {
             GameManager.instance.AddScore(1);
         }
     }
+
+
+
+
 }
