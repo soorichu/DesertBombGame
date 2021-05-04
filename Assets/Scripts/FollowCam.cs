@@ -18,6 +18,10 @@ public class FollowCam : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (GameManager.instance.isGameover)
+        {
+            return;
+        }
         float currYAngle = Mathf.LerpAngle(tr.eulerAngles.y, target.eulerAngles.y, smoothRotate * Time.deltaTime);
 
         Quaternion rot = Quaternion.Euler(0, currYAngle, 0);

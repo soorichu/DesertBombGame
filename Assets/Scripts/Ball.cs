@@ -16,7 +16,11 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if(collisionTime!=0f && Time.time >= collisionTime + interval)
+        if (GameManager.instance.isGameover)
+        {
+            return;
+        }
+        if (collisionTime!=0f && Time.time >= collisionTime + interval)
         {
             collisionTime = Time.time;
             interval = Random.Range(7, 15);

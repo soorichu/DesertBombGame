@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-
-    public float speed = 10.0F;
-    public float rotationSpeed = 100.0F;
     private Animator myAnimator;
     public AudioClip deathClip;
+
+    private float translation;
+    private float rotation;
+
+    private Vector3 mousePos1;
+    private Vector3 mousePos2;
 
     private void Start()
     {
@@ -21,8 +24,31 @@ public class BombController : MonoBehaviour
             return;
         }
 
-        float translation = Input.GetAxis("Vertical") * speed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        if (Input.GetMouseButtonDown(0))
+        {
+            mousePos1 = new Vector3(Input.mousePosition.x, 0f, Input.mousePosition.y);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            mousePos2 = new Vector3(Input.mousePosition.x, 0f, Input.mousePosition.y);
+        }
+
+        if(mousePos1 != mousePos2)
+        {
+            translation = (mousePos2.z - mousePos1.z) / 10f;
+
+            if(Mathf.Abs(mousePos2.x - mousePos1.x) > 20f)
+            {
+                translation = 0f;
+                rotation = mousePos2.x - mousePos1.x;
+            }
+        }
+
+        if (Input.anyKey)
+        {
+            translation = Input.GetAxis("Vertical") * 10f;
+            rotation = Input.GetAxis("Horizontal") * 100f;
+        }
 
         if (translation != 0.0f || rotation != 0.0f)
         {
