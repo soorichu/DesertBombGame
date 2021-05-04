@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public bool isGameover = false;
     public Text scoreText;
     public GameObject gameoverUI;
-    private int score = 0;
+    public int score = 0;
 
     void Awake()
     {

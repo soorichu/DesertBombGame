@@ -5,7 +5,9 @@ using UnityEngine;
 public class BombController : MonoBehaviour
 {
     private Animator myAnimator;
-    public AudioClip deathClip;
+    private AudioSource myAudioSource;
+
+    public AudioClip bombClip;
 
     private float translation;
     private float rotation;
@@ -15,6 +17,7 @@ public class BombController : MonoBehaviour
 
     private void Start()
     {
+        myAudioSource = gameObject.GetComponent<AudioSource>();
         myAnimator = gameObject.GetComponent<Animator>();
     }
     void Update()
@@ -72,17 +75,20 @@ public class BombController : MonoBehaviour
         {
             return;
         }
+
         if (collision.collider.tag == "Obstacle")
         {
             myAnimator.SetTrigger("damage");
             GameManager.instance.AddScore(-1);
+            if(GameManager.instance.score < 0)
+            {
+                Die();
+            }
         }
 
         if (collision.collider.tag == "BadBall")
         {
-            myAnimator.SetBool("walk", false);
-            myAnimator.SetTrigger("attack01");
-            GameManager.instance.OnPlayerDead();
+            Die();
         }
 
         if (collision.collider.tag == "GoodBall")
@@ -91,7 +97,14 @@ public class BombController : MonoBehaviour
         }
     }
 
+    private void Die()
+    {
+        myAudioSource.clip = bombClip;
+        myAudioSource.Play();
 
-
+        myAnimator.SetBool("walk", false);
+        myAnimator.SetTrigger("attack01");
+        GameManager.instance.OnPlayerDead();
+    }
 
 }
